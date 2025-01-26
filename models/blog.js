@@ -16,11 +16,11 @@ const blogSchema = new Schema({
     },
     createdBy:{
         type:Schema.Types.ObjectId,
-        ref :'user',
+        ref :'User',
     }
 },
 {timestamps:true}
 );
 
-const Blog = model('blog',blogSchema);
+const Blog = model('Blog',blogSchema);
 module.exports = Blog;

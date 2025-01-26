@@ -19,6 +19,7 @@ app.use(express.urlencoded({extended:true})); //for form data
 app.use(express.json());
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
+app.use(express.static('public'));
 
 
 mongoose.connect("mongodb://127.0.0.1:27017/bloggers").then((e) => {
