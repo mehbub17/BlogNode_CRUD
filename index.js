@@ -9,10 +9,12 @@ const { json } = require("stream/consumers");
 const cookieParser = require('cookie-parser');
 const { checkForAuthenticationCookie } = require("./middlewares/authentication.js");
 
+const Blog = require("./models/blog.js");
+
 const app = express();
 const PORT = 8000;
 
-
+app.use(express.static(path.resolve('./public')));
 app.use(express.urlencoded({extended:true})); //for form data
 app.use(express.json());
 app.use(cookieParser());
@@ -31,9 +33,13 @@ app.use("/user", userRoute);
 
 
 
-app.get("/", (req, res) => {
+app.get("/",async (req, res) => {
+
+  const allBlogs = await Blog.find({});
+
   res.render("home",{
     user:req.user,
+    blogs:allBlogs,
   });
 });
 
